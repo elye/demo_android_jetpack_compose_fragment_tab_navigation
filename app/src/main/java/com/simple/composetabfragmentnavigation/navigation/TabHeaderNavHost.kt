@@ -1,5 +1,6 @@
 package com.simple.composetabfragmentnavigation.navigation
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Tab
@@ -17,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 
 @Composable
 fun TabHeaderNavHost(navController: NavHostController) {
@@ -32,7 +34,10 @@ fun TabHeaderNavHost(navController: NavHostController) {
         selectedTabIndex = selectedTabIndex,
         containerColor = Color.Gray,
     ) {
-        tabs.forEachIndexed { index, item ->
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val currentRoute = navBackStackEntry?.destination?.route
+        tabs.forEach { item ->
+            selectedTabIndex = tabs.indexOf(tabs.find {it.route == currentRoute })
             Tab(
                 text = {
                     Column (horizontalAlignment = CenterHorizontally) {
@@ -45,9 +50,8 @@ fun TabHeaderNavHost(navController: NavHostController) {
                         )
                     }
                 },
-                selected = selectedTabIndex == index,
+                selected = currentRoute == item.route,
                 onClick = {
-                    selectedTabIndex = index
                     navController.navigate(item.route) {
                         // Pop up to the start destination of the graph to
                         // avoid building up a large stack of destinations

@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.simple.composetabfragmentnavigation.activities.RestorableBottomBarActivity
+import com.simple.composetabfragmentnavigation.activities.RestorableTabNavHostActivity
 import com.simple.composetabfragmentnavigation.activities.RestorableTabSelfNavActivity
 import com.simple.composetabfragmentnavigation.ui.theme.ComposeTabFragmentNavigationTheme
 
@@ -43,6 +44,16 @@ class MainActivity : ComponentActivity() {
                 )
             }) {
                 Text("Pop and Restore-able Fragments in Bottom Sheet")
+            }
+
+            Button(onClick = {
+                startActivity(
+                    Intent(
+                        this@MainActivity,
+                        RestorableTabNavHostActivity::class.java)
+                )
+            }) {
+                Text("Pop and Restore-able Fragments in NavHost Navigation Tab")
             }
 
             Button(onClick = {

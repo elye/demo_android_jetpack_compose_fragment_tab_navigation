@@ -1,5 +1,4 @@
 package com.simple.composetabfragmentnavigation.activities
-
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.SparseArray
@@ -12,25 +11,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.example.myapplication.fragments.ContainerFragment
-import com.simple.composetabfragmentnavigation.fragment.FragmentContainer
-import com.simple.composetabfragmentnavigation.navigation.NavigationItem
-import com.simple.composetabfragmentnavigation.navigation.NavigationSelfMade
-import com.simple.composetabfragmentnavigation.navigation.TabHeaderSelfNav
+import androidx.navigation.compose.rememberNavController
+import com.simple.composetabfragmentnavigation.navigation.NavigationNavHost
+import com.simple.composetabfragmentnavigation.navigation.TabHeaderNavHost
 import com.simple.composetabfragmentnavigation.navigation.TopBar
 import com.simple.composetabfragmentnavigation.ui.theme.ComposeTabFragmentNavigationTheme
 
 
-class RestorableTabSelfNavActivity : FragmentActivity() {
+class RestorableTabNavHostActivity : FragmentActivity() {
     private var savedStateSparseArray = SparseArray<Fragment.SavedState>()
     private var currentSelectItemId = 0
 
@@ -85,29 +78,13 @@ class RestorableTabSelfNavActivity : FragmentActivity() {
     @Composable
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     fun MainScreen() {
-        var selectedTab by rememberSaveable { mutableStateOf(NavigationItem.Home.route) }
+        val navController = rememberNavController()
         Scaffold(
             topBar = { TopBar() },
-        ) {padding ->
+        ) { padding ->
             Column(modifier = Modifier.padding(padding)) {
-                TabHeaderSelfNav { clickTab ->
-                    selectedTab = clickTab
-                }
-                NavigationSelfMade(selectedTab) {
-                        selectedTab ->
-
-                    val item = enumValues<NavigationItem>().find {
-                        it.route == selectedTab
-                    } ?: NavigationItem.Home
-
-                    FragmentContainer(
-                        modifier = Modifier.fillMaxSize(),
-                        commit = getCommitFunction(
-                            ContainerFragment.newInstance(item.title, item.color),
-                            item.route
-                        )
-                    )
-                }
+                TabHeaderNavHost(navController)
+                NavigationNavHost(navController, ::getCommitFunction)
             }
         }
     }

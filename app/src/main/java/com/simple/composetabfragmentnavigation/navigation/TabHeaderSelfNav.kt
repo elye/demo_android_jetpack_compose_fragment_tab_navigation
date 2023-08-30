@@ -17,7 +17,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun TabHeader(navController: (String) -> Unit) {
+fun TabHeaderSelfNav(navController: (String) -> Unit) {
     var selectedTabIndex by rememberSaveable { mutableStateOf(0) }
     val tabs = listOf(
         NavigationItem.Home,

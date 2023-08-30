@@ -24,7 +24,7 @@ import com.simple.composetabfragmentnavigation.navigation.TopBar
 import com.simple.composetabfragmentnavigation.ui.theme.ComposeTabFragmentNavigationTheme
 
 
-class RestorableActivity : FragmentActivity() {
+class RestorableBottomBarActivity : FragmentActivity() {
     private var savedStateSparseArray = SparseArray<Fragment.SavedState>()
     private var currentSelectItemId = 0
 

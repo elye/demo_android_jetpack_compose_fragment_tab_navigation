@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.RestorableActivity" />
+        <activity android:name=".activities.RestorableBottomBarActivity" />
         <activity android:name=".activities.RestorableTabSelfNavActivity" />
     </application>
 

@@ -13,7 +13,7 @@ import com.example.myapplication.fragments.ContainerFragment
 import com.simple.composetabfragmentnavigation.fragment.FragmentContainer
 
 @Composable
-fun NavHostNavigation(
+fun NavigationNavHost(
     navController: NavHostController,
     getCommitFunction: (
         fragment: Fragment,

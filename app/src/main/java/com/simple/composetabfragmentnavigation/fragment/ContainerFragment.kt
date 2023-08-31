@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import com.simple.composetabfragmentnavigation.R
 
@@ -53,6 +54,24 @@ class ContainerFragment : Fragment() {
             }
         }
 
+        requireActivity().onBackPressedDispatcher.addCallback(
+            owner = viewLifecycleOwner,
+            enabled = true,
+        ) {
+            requireActivity().supportFragmentManager.fragments.forEach { fragment ->
+                if (fragment != null && fragment.isVisible) {
+                    with(fragment.childFragmentManager) {
+                        if (backStackEntryCount > 0) {
+                            popBackStack()
+                            return@addCallback
+                        }
+                    }
+                }
+            }
+
+            this@addCallback.isEnabled = false
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
         childFragmentManager.addOnBackStackChangedListener { count = childFragmentManager.backStackEntryCount }
     }
 

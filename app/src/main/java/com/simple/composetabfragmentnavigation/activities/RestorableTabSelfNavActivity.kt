@@ -3,6 +3,7 @@ package com.simple.composetabfragmentnavigation.activities
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.SparseArray
+import androidx.activity.addCallback
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -59,26 +60,16 @@ class RestorableTabSelfNavActivity : FragmentActivity() {
                 }
             }
         }
+
+        onBackPressedDispatcher.addCallback(this, onBackPressed = {
+            finish()
+        })
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putSparseParcelableArray(SAVED_STATE_CONTAINER_KEY, savedStateSparseArray)
         outState.putInt(SAVED_STATE_CURRENT_TAB_KEY, currentSelectItemId)
-    }
-
-    override fun onBackPressed() {
-        supportFragmentManager.fragments.forEach { fragment ->
-            if (fragment != null && fragment.isVisible) {
-                with(fragment.childFragmentManager) {
-                    if (backStackEntryCount > 0) {
-                        popBackStack()
-                        return
-                    }
-                }
-            }
-        }
-        super.onBackPressed()
     }
 
     @OptIn(ExperimentalMaterial3Api::class)

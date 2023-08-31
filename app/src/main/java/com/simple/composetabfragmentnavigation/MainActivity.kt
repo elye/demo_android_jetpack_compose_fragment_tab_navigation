@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
                         RestorableTabNavHostActivity::class.java)
                 )
             }) {
-                Text("Pop and Restore-able Fragments in NavHost Navigation Tab")
+                Text("Pop and Restore-able Fragments in NavHost Tab")
             }
 
             Button(onClick = {
@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity() {
                         RestorableTabSelfNavActivity::class.java)
                 )
             }) {
-                Text("Pop and Restore-able Fragments in Self Made Navigation Tab")
+                Text("Pop and Restore-able Fragments in SelfMadeNav Tab")
             }
         }
     }

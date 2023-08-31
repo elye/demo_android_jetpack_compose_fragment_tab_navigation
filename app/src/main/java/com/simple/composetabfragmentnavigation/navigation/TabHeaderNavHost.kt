@@ -3,11 +3,11 @@ package com.simple.composetabfragmentnavigation.navigation
 import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
@@ -32,7 +32,7 @@ fun TabHeaderNavHost(navController: NavHostController) {
     )
     TabRow(
         selectedTabIndex = selectedTabIndex,
-        containerColor = Color.Gray,
+        containerColor = MaterialTheme.colorScheme.primary,
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route

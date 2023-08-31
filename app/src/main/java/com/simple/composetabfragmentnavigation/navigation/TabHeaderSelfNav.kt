@@ -2,11 +2,13 @@ package com.simple.composetabfragmentnavigation.navigation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -18,7 +20,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun TabHeaderSelfNav(navController: (String) -> Unit) {
-    var selectedTabIndex by rememberSaveable { mutableStateOf(0) }
+    var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
     val tabs = listOf(
         NavigationItem.Home,
         NavigationItem.Music,
@@ -28,7 +30,7 @@ fun TabHeaderSelfNav(navController: (String) -> Unit) {
     )
     TabRow(
         selectedTabIndex = selectedTabIndex,
-        containerColor = Color.Gray,
+        containerColor = MaterialTheme.colorScheme.primary,
     ) {
         tabs.forEachIndexed { index, item ->
             Tab(

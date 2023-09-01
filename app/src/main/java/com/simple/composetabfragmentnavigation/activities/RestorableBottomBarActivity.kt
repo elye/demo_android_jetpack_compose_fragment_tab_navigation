@@ -54,10 +54,6 @@ class RestorableBottomBarActivity : FragmentActivity() {
                 }
             }
         }
-
-        onBackPressedDispatcher.addCallback(this, onBackPressed = {
-            finish()
-        })
     }
 
 

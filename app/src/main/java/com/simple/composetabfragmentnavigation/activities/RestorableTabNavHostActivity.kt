@@ -53,10 +53,6 @@ class RestorableTabNavHostActivity : FragmentActivity() {
                 }
             }
         }
-
-        onBackPressedDispatcher.addCallback(this, onBackPressed = {
-            finish()
-        })
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

@@ -53,24 +53,6 @@ class ContainerFragment : Fragment() {
                     .commit()
             }
         }
-
-        requireActivity().onBackPressedDispatcher.addCallback(
-            owner = viewLifecycleOwner
-        ) {
-            requireActivity().supportFragmentManager.fragments.forEach { fragment ->
-                if (fragment != null && fragment.isVisible) {
-                    with(fragment.childFragmentManager) {
-                        if (backStackEntryCount > 0) {
-                            popBackStack()
-                            return@addCallback
-                        }
-                    }
-                }
-            }
-
-            this@addCallback.remove()
-            requireActivity().onBackPressedDispatcher.onBackPressed()
-        }
         childFragmentManager.addOnBackStackChangedListener { count = childFragmentManager.backStackEntryCount }
     }
 

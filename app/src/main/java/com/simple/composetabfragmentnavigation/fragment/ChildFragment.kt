@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import com.simple.composetabfragmentnavigation.R
 
@@ -30,6 +31,12 @@ class ChildFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
             view.findViewById<TextView>(R.id.child_text_title).text = it.getString(KEY)
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            owner = viewLifecycleOwner
+        ) {
+            parentFragment?.childFragmentManager?.popBackStack()
         }
     }
 

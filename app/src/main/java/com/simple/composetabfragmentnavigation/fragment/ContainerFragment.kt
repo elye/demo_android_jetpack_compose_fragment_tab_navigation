@@ -55,8 +55,7 @@ class ContainerFragment : Fragment() {
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(
-            owner = viewLifecycleOwner,
-            enabled = true,
+            owner = viewLifecycleOwner
         ) {
             requireActivity().supportFragmentManager.fragments.forEach { fragment ->
                 if (fragment != null && fragment.isVisible) {
@@ -69,7 +68,7 @@ class ContainerFragment : Fragment() {
                 }
             }
 
-            this@addCallback.isEnabled = false
+            this@addCallback.remove()
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
         childFragmentManager.addOnBackStackChangedListener { count = childFragmentManager.backStackEntryCount }
